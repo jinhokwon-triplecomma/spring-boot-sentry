@@ -1,0 +1,27 @@
+server:
+  port: 5000
+  shutdown: graceful  # 진행중인 작업을 마무리를 한 뒤 애플리케이션이 종료될 수 있게끔 설정함.
+
+spring:
+  profiles:
+    active: local
+  lifecycle:
+    timeout-per-shutdown-phase: 30s # shutdown timeout
+
+sentry:
+  dsn: ${SENTRY_DSN:}
+  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
+  # We recommend adjusting this value in production.
+  traces-sample-rate: 1.0
+
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        SQL_SLOW: info
+        SQL: info # DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: info # TRACE
